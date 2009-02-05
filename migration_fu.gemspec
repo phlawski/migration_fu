@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.version = "0.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Steffen Leistner"]
+  s.authors = ["Steffen Leistner", "Piotr Hlawski"]
   s.date = %q{2009-02-05}
   s.description = %q{Add or remove foreign keys}
   s.email = %q{sleistner@gmail.com}
