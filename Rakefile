@@ -33,9 +33,9 @@ namespace :test do
   end
 end
 
-Echoe.new('migration_fu', '0.0.1') do |p|
+Echoe.new('migration_fu', '0.0.2') do |p|
   p.description     = 'Add or remove foreign keys'
-  p.url             = 'http://github.com/sleistner/migration_fu'
+  p.url             = 'http://github.com/phlawski/migration_fu'
   p.author          = 'Steffen Leistner'
   p.email           = 'sleistner@gmail.com'
   p.ignore_pattern  = ['tmp/*', 'script/*.rake']

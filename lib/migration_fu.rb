@@ -10,10 +10,11 @@ module ActiveRecord
 
       def add_foreign_key(from_table, to_table, options = {})
         process(from_table, to_table, options) do |ft, tt, id|
-          execute "ALTER TABLE #{ft} ADD CONSTRAINT #{id} FOREIGN KEY(#{tt.singularize}_id) REFERENCES #{tt}(id)" << conditions(options)
-        end 
+          fk_col_name = options[:fk_col_name] || "#{tt.singularize}_id"
+          execute "ALTER TABLE #{ft} ADD CONSTRAINT #{id} FOREIGN KEY(#{fk_col_name}) REFERENCES #{tt}(id)" << conditions(options)
+        end
       end
-      
+
       def remove_foreign_key(from_table, to_table, options = {})
         process(from_table, to_table, options) do |ft, tt, id|
           execute "ALTER TABLE #{ft} DROP FOREIGN KEY #{id}"
@@ -39,7 +40,7 @@ module ActiveRecord
       end
 
       def process(from_table, to_table, options)
-        id = options[:name] || "fk_#{from_table}_#{to_table}"
+        id = options[:name].to_s || "fk_#{from_table}_#{to_table}"
 
         if id.size > MAX_KEY_LENGTH
           id = id.slice(0...MAX_KEY_LENGTH)
@@ -47,7 +48,7 @@ module ActiveRecord
         end
         yield(from_table.to_s, to_table.to_s, id)
       end
-      
+
     end
   end
 end
