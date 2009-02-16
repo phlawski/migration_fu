@@ -40,10 +40,10 @@ module ActiveRecord
       end
 
       def process(from_table, to_table, options)
-        id = options[:name].to_s || "fk_#{from_table}_#{to_table}"
+        id = options[:name] || "fk_#{from_table}_#{to_table}"
 
-        if id.size > MAX_KEY_LENGTH
-          id = id.slice(0...MAX_KEY_LENGTH)
+        if id.to_s.size > MAX_KEY_LENGTH
+          id = id.to_s.slice(0...MAX_KEY_LENGTH)
           puts "Warning: foreign key id has more then #{MAX_KEY_LENGTH} characters - sliced to '#{id}'"
         end
         yield(from_table.to_s, to_table.to_s, id)
